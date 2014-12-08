@@ -39,34 +39,65 @@
         <ul></ul>
       </nav>
       <section>
-        <h1>
-<a id="baxtertower" class="anchor" href="#baxtertower" aria-hidden="true"><span class="octicon octicon-link"></span></a>BaxterTower</h1>
-
-<p>Repository for Baxter Builds a Tower Code</p>
+        <p>Markdown reference
+Project Guidelines</p>
 
 <h1>
 <a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h1>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>In <strong>Baxter Builds a Tower</strong>, the end goal is to allow a <a href="http://www.rethinkrobotics.com/">Baxter robot</a> to autonomously pick up toy blocks in any desired order and then stack them vertically to create a tower.</p>
 
+<p><strong>Baxter Builds a Tower</strong> is an interesting project because it combines both robust computer vision and good kinematics/path planning for success. In our traditional mechanical engineering training, we often deal with the latter instead of the former. Therefore, <strong>Baxter Builds a Tower</strong> is a very attractive project for us because we get the rare chance to work in both realms of robotics at once. In the course of this project, we had to overcome the limitations of off the shelf computer vision packages as well as the hardware limitations in Baxter’s end effector accuracy. In later sections, we will detail how we overcame these obstacles.</p>
 
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>The work developed in this project can be useful in car junkyards when cars arrive and need to be stacked/stored. Upon further extension, the work here can also aid in assembly line quality assurance tasks, such as removing defective products from an assembly line and storing them in a separate location for further processing. More importantly, Baxter playing with toy blocks is a great boon towards promoting STEM to the younger audience.</p>
 
 <h1>
 <a id="design" class="anchor" href="#design" aria-hidden="true"><span class="octicon octicon-link"></span></a>Design</h1>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<h2>
+<a id="criterias" class="anchor" href="#criterias" aria-hidden="true"><span class="octicon octicon-link"></span></a>Criterias</h2>
+
+<ul>
+<li>Identify toy blocks through computer vision</li>
+<li>Retrieve toy blocks with robotic arm</li>
+<li>Place toy blocks down and successively stack blocks vertically into a tower</li>
+<li>Repeat</li>
+<li><strong>Baxter will autonomously pick up many toy blocks and successively stack them to make a tower</strong></li>
+</ul>
+
+<p>To achieve the above, we decided to use <a href="http://wiki.ros.org/ar_track_alvar">AR Tags</a> and <a href="http://moveit.ros.org/">ROS MoveIt</a> pathplanner in order to manipulate toy blocks conveniently sold in various toy stores. We decided to use AR Tags to simplify the task of computer vision, but at the expense of only manipulating objects with large planar faces that can support an AR Tag. Moreover, we had to use cameras located on Baxter’s hand in order to perceive the toy blocks because the head-mounted camera is too far away to accurately detect AR Tags. Consequently, the robot workspace decreased accordingly because of the camera’s decreased field of view. Finally, we intelligently selected the location of toy blocks and arm motion trajectory to minimize the chance of toy block to robot collisions. By doing so, we can avoid importing CAD models of the environment to RVIZ  and save on computation time in path planning.</p>
+
+<p>The simplifying design choices made here probably would not suffice in the real world. The decision to use AR Tags definitely constrains the realistic sizes of objects we can manipulate with. Moreover, using hand-mounted cameras, instead of head-mounted or externally mounted, cameras definitely limits the workspace and forces us to be tied to platforms, like Baxter, with hand-mounted cameras. Finally, not allowing Baxter to be cognizant of its environment means that environments would have to be highly controlled and largely static, characteristics that are too idealized compared to the real world.</p>
 
 <h1>
 <a id="implementation" class="anchor" href="#implementation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Implementation</h1>
+
+<p>＃System Introduction
+Hardware:
+Baxter
+Baxter is a human form and proportional robot with two 7-degree-of-freedom arms. It
+also has a good vision-guided capability to detect/recognize objects in the workspace.
+Thus, it has several nice features to implement our task.
+Building Blocks
+Building bricks are wooden, plastic or foam pieces of various shapes (square,
+cylinder,arch, triangle, etc.) and colors that are used as construction toys. In our project, it
+is the construction materials to build a house.
+ARTag
+ARTag is a fiduciary marker system to support augmented reality. It can be used to make
+it easy to make virtual objects, games, and animations appear to enter the real world. Like
+the earlier ARToolKit system, it allows for video tracking capabilities that calculate the
+real camera position and orientation relative to square physical markers in real time.</p>
+
+<p>Software:
+ROS
+The Robot Operating System (ROS) is a flexible framework for writing robot software. It
+is a collection of tools, libraries, and conventions that aim to simplify the task of creating
+complex and robust robot behavior across a wide variety of robotic platforms.</p>
 
 <p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
 
 <h1>
 <a id="results" class="anchor" href="#results" aria-hidden="true"><span class="octicon octicon-link"></span></a>Results</h1>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
 
 <h1>
 <a id="conclusion" class="anchor" href="#conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h1>
