@@ -39,13 +39,12 @@
         <ul></ul>
       </nav>
       <section>
-        <p>Markdown reference
-Project Guidelines</p>
-
-<h1>
+        <h1>
 <a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h1>
 
 <p>In <strong>Baxter Builds a Tower</strong>, the end goal is to allow a <a href="http://www.rethinkrobotics.com/">Baxter robot</a> to autonomously pick up toy blocks in any desired order and then stack them vertically to create a tower.</p>
+
+<p><img src="http://ucbbaxtertower.github.io/BaxterTower/media/tower1.jpg" alt="Toy blocks being stacked"></p>
 
 <p><strong>Baxter Builds a Tower</strong> is an interesting project because it combines both robust computer vision and good kinematics/path planning for success. In our traditional mechanical engineering training, we often deal with the latter instead of the former. Therefore, <strong>Baxter Builds a Tower</strong> is a very attractive project for us because we get the rare chance to work in both realms of robotics at once. In the course of this project, we had to overcome the limitations of off the shelf computer vision packages as well as the hardware limitations in Baxter’s end effector accuracy. In later sections, we will detail how we overcame these obstacles.</p>
 
@@ -54,8 +53,8 @@ Project Guidelines</p>
 <h1>
 <a id="design" class="anchor" href="#design" aria-hidden="true"><span class="octicon octicon-link"></span></a>Design</h1>
 
-<h2>
-<a id="criterias" class="anchor" href="#criterias" aria-hidden="true"><span class="octicon octicon-link"></span></a>Criterias</h2>
+<h3>
+<a id="criterias" class="anchor" href="#criterias" aria-hidden="true"><span class="octicon octicon-link"></span></a>Criterias</h3>
 
 <ul>
 <li>Identify toy blocks through computer vision</li>
@@ -72,47 +71,66 @@ Project Guidelines</p>
 <h1>
 <a id="implementation" class="anchor" href="#implementation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Implementation</h1>
 
-<p>＃System Introduction
-Hardware:
-Baxter
-Baxter is a human form and proportional robot with two 7-degree-of-freedom arms. It
-also has a good vision-guided capability to detect/recognize objects in the workspace.
-Thus, it has several nice features to implement our task.
-Building Blocks
-Building bricks are wooden, plastic or foam pieces of various shapes (square,
-cylinder,arch, triangle, etc.) and colors that are used as construction toys. In our project, it
-is the construction materials to build a house.
-ARTag
-ARTag is a fiduciary marker system to support augmented reality. It can be used to make
-it easy to make virtual objects, games, and animations appear to enter the real world. Like
-the earlier ARToolKit system, it allows for video tracking capabilities that calculate the
-real camera position and orientation relative to square physical markers in real time.</p>
+<p>To complete our project, we used the standard Baxter robotic platform with the suction actuator attachment. We manipulated with toy blocks that were 1.5” cubes and made of wood. On one face of each toy block, we adhered AR Tags to enable Baxter to uniquely identify each block.</p>
 
-<p>Software:
-ROS
-The Robot Operating System (ROS) is a flexible framework for writing robot software. It
-is a collection of tools, libraries, and conventions that aim to simplify the task of creating
-complex and robust robot behavior across a wide variety of robotic platforms.</p>
+<p>The <a href="http://www.ros.org/">ROS</a> framework is the software glue that ties all of the hardware together.</p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<ol>
+<li>Initialization of AR tracking and MoveIt server as well as robot and camera enabling</li>
+<li>Move Baxter’s right arm over toy blocks to localize toy blocks location in the base frame</li>
+<li>The publisherMarkerInfo node will publish to found_markers with an array of all markers that were identified</li>
+<li>The master node decides which AR Tag to retrieve and computes the transform between the base frame and the AR Tag frame</li>
+<li>The translational component of the transform is used by MoveIt as a destination waypoint.
+6 .The master node also appends a series of intermediate waypoints to help anchor MoveIt’s trajectory so that the arm moves away from the toy block in the z-direction and approaches the stack of toy blocks from the z-direction </li>
+<li>Baxter’s right arm is moved over toy blocks again to get an updated reading of the remaining toy blocks’ location</li>
+<li>Steps 4 to 6 are repeated until all blocks have been retrieved and stacked</li>
+</ol>
 
 <h1>
 <a id="results" class="anchor" href="#results" aria-hidden="true"><span class="octicon octicon-link"></span></a>Results</h1>
 
+<p>The video below summarizes our work. Concisely, we successfully:</p>
+
+<ul>
+<li>Implemented autonomously tracking and selection of toy blocks, marked by AR Tags</li>
+<li>Implemented autonomous path planning between toy block retrieval and placement</li>
+<li>Demonstrated an ability to stack toy blocks successively 10 times in a vertical fashion</li>
+</ul>
+
 <h1>
 <a id="conclusion" class="anchor" href="#conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h1>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="https://help.github.com/pages">https://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>Compared to our original goals, we have completed most of our objectives except the ability to build more complicated structures, such as a house. This can be attributed to Baxter’s intrinsic positional inaccuracy in its arm which hinders its ability to place toy blocks in a structurally stable fashion.</p>
+
+<p>Moreover, Baxter’s hand-mounted cameras exhibited a fish-eye effect which led to errors in perceiving the location of the AR Tags. This distortion could have been easily fixed by a proper calibration, but Baxter does not readily support such services.</p>
+
+<p>If we had additional time, we would invest in an external camera solution to expand our viewable workspace as well as increase reliability in our sensing through properly calibrated cameras. Plus, we calibrated our robot towards a particular table height (i.e. the Cory 119 table) in order to keep our problem tractable.</p>
+
+<p>For a summary, please see our <a href="www.google.com">slides</a>.</p>
 
 <h1>
 <a id="team" class="anchor" href="#team" aria-hidden="true"><span class="octicon octicon-link"></span></a>Team</h1>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="https://help.github.com/pages">https://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<h3>
+<a id="hsien-chung-lin" class="anchor" href="#hsien-chung-lin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hsien-Chung Lin</h3>
+
+<h3>
+<a id="te-tang" class="anchor" href="#te-tang" aria-hidden="true"><span class="octicon octicon-link"></span></a>Te Tang</h3>
+
+<h3>
+<a id="dennis-wai" class="anchor" href="#dennis-wai" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dennis Wai</h3>
+
+<p>Dennis Wai is a Mechanical Engineering student that is a little too interested in Electrical Engineering and Computer Science. He likes robots and often can be found volunteering with <a href="pioneers.berkeley.edu">Pioneers in Engineering</a>, a student group focused on delivering robotics experience to underserved Bay Area communities. For this other interests, you can check out his <a href="denniswai.com">website</a></p>
 
 <h1>
 <a id="additional-materials" class="anchor" href="#additional-materials" aria-hidden="true"><span class="octicon octicon-link"></span></a>Additional Materials</h1>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="https://help.github.com/pages">https://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<ul>
+<li>Source Code on <a href="https://github.com/ucbBaxterTower/BaxterTower">Github</a>
+</li>
+<li><a href="http://www.toysrus.com/product/index.jsp?productId=37649076&amp;cp=&amp;parentPage=search">Toy blocks</a></li>
+<li><a href="www.ros.org">ROS</a></li>
+</ul>
       </section>
       <footer>
         <p>Project maintained by <a href="https://github.com/ucbBaxterTower">ucbBaxterTower</a></p>
