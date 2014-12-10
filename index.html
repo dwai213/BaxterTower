@@ -51,7 +51,7 @@
 </figure>
 </div>
 <br>
-<p><strong>Baxter Builds a Tower</strong> is an interesting project because it combines both robust computer vision and good kinematics/path planning for success. In our traditional mechanical engineering training, we often deal with the latter instead of the former. Therefore, <strong>Baxter Builds a Tower</strong> is a very attractive project for us because we get the rare chance to work in both realms of robotics at once. In the course of this project, we had to overcome the limitations of off the shelf computer vision packages as well as the hardware limitations in Baxter’s end effector accuracy. In later sections, we will detail how we overcame these obstacles.</p>
+<p><strong>Baxter Builds a Tower</strong> is an interesting project because it combines both robust computer vision and good kinematics/path planning for success. In our traditional mechanical engineering training, we often deal with the latter instead of the former. Therefore, <strong>Baxter Builds a Tower</strong> is a very attractive project for us because we get the rare chance to work in both realms of robotics at once. In the course of this project, we had to overcome the limitations of off the shelf computer vision packages as well as the hardware limitations in Baxter’s end effector accuracy. We will discuss these issues in great detail in later sections.</p>
 
 <p>The work developed in this project can be useful in car junkyards when cars arrive and need to be stacked/stored. Upon further extension, the work here can also aid in assembly line quality assurance tasks, such as removing defective products from an assembly line and storing them in a separate location for further processing. More importantly, Baxter playing with toy blocks is a great boon towards promoting STEM to the younger audience.</p>
 
@@ -72,7 +72,7 @@
 <li>Identify toy blocks through computer vision</li>
 <li>Retrieve toy blocks with robotic arm</li>
 <li>Place toy blocks down and successively stack blocks vertically into a tower</li>
-<li>Repeat</li>
+<li>Consistenyl repeatable</li>
 <li><strong>Baxter will autonomously pick up many toy blocks and successively stack them to make a tower</strong></li>
 </ul>
 
@@ -90,7 +90,6 @@
 <h1>
 <a id="implementation" class="anchor" href="#implementation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Implementation</h1>
 
-<br>
 <p>To complete our project, we used the standard Baxter robotic platform with the suction actuator attachment. We manipulated with toy blocks that were 1.5” cubes and made of wood. On one face of each toy block, we adhered AR Tags to enable Baxter to uniquely identify each block.</p>
 
 <div align="center">
@@ -148,7 +147,7 @@
 </figure>
 </div>
 <br>
-<p>If we had additional time, we would invest in an external camera solution to expand our viewable workspace as well as increase reliability in our sensing through properly calibrated cameras. Plus, we calibrated our robot towards a particular table height (i.e. the Cory 119 table) in order to keep our problem tractable.</p>
+<p>If we had additional time, we would invest in an external camera solution to expand our viewable workspace as well as increase reliability in our sensing through properly calibrated cameras. Plus, we calibrated our robot towards a particular table height (i.e. the Cory 119 table) in order to keep our problem tractable. Future work should include robustness towards a variety of table heights.</p>
 
 <p>For a summary, please see our <a href="http://ucbbaxtertower.github.io/BaxterTower/media/ucbBaxterTower_slides.pdf">slides</a>.</p>
 
