@@ -50,6 +50,8 @@
 
 <p>The work developed in this project can be useful in car junkyards when cars arrive and need to be stacked/stored. Upon further extension, the work here can also aid in assembly line quality assurance tasks, such as removing defective products from an assembly line and storing them in a separate location for further processing. More importantly, Baxter playing with toy blocks is a great boon towards promoting STEM to the younger audience.</p>
 
+<p><img src="http://ucbbaxtertower.github.io/BaxterTower/media/tower2.jpg" alt="Image courtesy of rethinkrobotics"></p>
+
 <h1>
 <a id="design" class="anchor" href="#design" aria-hidden="true"><span class="octicon octicon-link"></span></a>Design</h1>
 
@@ -65,6 +67,8 @@
 </ul>
 
 <p>To achieve the above, we decided to use <a href="http://wiki.ros.org/ar_track_alvar">AR Tags</a> and <a href="http://moveit.ros.org/">ROS MoveIt</a> pathplanner in order to manipulate toy blocks conveniently sold in various toy stores. We decided to use AR Tags to simplify the task of computer vision, but at the expense of only manipulating objects with large planar faces that can support an AR Tag. Moreover, we had to use cameras located on Baxter’s hand in order to perceive the toy blocks because the head-mounted camera is too far away to accurately detect AR Tags. Consequently, the robot workspace decreased accordingly because of the camera’s decreased field of view. Finally, we intelligently selected the location of toy blocks and arm motion trajectory to minimize the chance of toy block to robot collisions. By doing so, we can avoid importing CAD models of the environment to RVIZ  and save on computation time in path planning.</p>
+
+<p><img src="http://ucbbaxtertower.github.io/BaxterTower/media/tower3.jpg" alt="Baxter and toy blocks placed before it"></p>
 
 <p>The simplifying design choices made here probably would not suffice in the real world. The decision to use AR Tags definitely constrains the realistic sizes of objects we can manipulate with. Moreover, using hand-mounted cameras, instead of head-mounted or externally mounted, cameras definitely limits the workspace and forces us to be tied to platforms, like Baxter, with hand-mounted cameras. Finally, not allowing Baxter to be cognizant of its environment means that environments would have to be highly controlled and largely static, characteristics that are too idealized compared to the real world.</p>
 
@@ -102,7 +106,11 @@
 
 <p>Compared to our original goals, we have completed most of our objectives except the ability to build more complicated structures, such as a house. This can be attributed to Baxter’s intrinsic positional inaccuracy in its arm which hinders its ability to place toy blocks in a structurally stable fashion.</p>
 
+<p><img src="http://ucbbaxtertower.github.io/BaxterTower/media/tower1.jpg" alt="Tower of toy blocks"></p>
+
 <p>Moreover, Baxter’s hand-mounted cameras exhibited a fish-eye effect which led to errors in perceiving the location of the AR Tags. This distortion could have been easily fixed by a proper calibration, but Baxter does not readily support such services.</p>
+
+<p><img src="http://ucbbaxtertower.github.io/BaxterTower/media/tower1.jpg" alt="Fish eye effect from the hand camera"></p>
 
 <p>If we had additional time, we would invest in an external camera solution to expand our viewable workspace as well as increase reliability in our sensing through properly calibrated cameras. Plus, we calibrated our robot towards a particular table height (i.e. the Cory 119 table) in order to keep our problem tractable.</p>
 
@@ -114,13 +122,18 @@
 <h3>
 <a id="hsien-chung-lin" class="anchor" href="#hsien-chung-lin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hsien-Chung Lin</h3>
 
+<p><img src="http://ucbbaxtertower.github.io/BaxterTower/media/tower1.jpg" alt="Hsien-Chung Lin"></p>
+
 <h3>
 <a id="te-tang" class="anchor" href="#te-tang" aria-hidden="true"><span class="octicon octicon-link"></span></a>Te Tang</h3>
+
+<p><img src="http://ucbbaxtertower.github.io/BaxterTower/media/tower1.jpg" alt="Te Tang"></p>
 
 <h3>
 <a id="dennis-wai" class="anchor" href="#dennis-wai" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dennis Wai</h3>
 
-<p>Dennis Wai is a Mechanical Engineering student that is a little too interested in Electrical Engineering and Computer Science. He likes robots and often can be found volunteering with <a href="pioneers.berkeley.edu">Pioneers in Engineering</a>, a student group focused on delivering robotics experience to underserved Bay Area communities. For this other interests, you can check out his <a href="denniswai.com">website</a></p>
+<p><img src="http://ucbbaxtertower.github.io/BaxterTower/media/tower1.jpg" alt="Dennis Wai">
+Dennis Wai is a Mechanical Engineering student that is a little too interested in Electrical Engineering and Computer Science. He likes robots and often can be found volunteering with <a href="pioneers.berkeley.edu">Pioneers in Engineering</a>, a student group focused on delivering robotics experience to underserved Bay Area communities. For this other interests, you can check out his <a href="denniswai.com">website</a></p>
 
 <h1>
 <a id="additional-materials" class="anchor" href="#additional-materials" aria-hidden="true"><span class="octicon octicon-link"></span></a>Additional Materials</h1>
