@@ -73,11 +73,12 @@
   <figcaption>Baxter Tower Project Timeline</figcaption>
 </figure>
 </div>
-
 <p> </p>
 
+<ol>
 <h3>
-<a id="criterias" class="anchor" href="#criterias" aria-hidden="true"><span class="octicon octicon-link"></span></a>Criterias</h3>
+<li><a id="criterias" class="anchor" href="#criterias" aria-hidden="true"><span class="octicon octicon-link"></span></a>Criterias</li></h3>
+
 
 <ul>
 <li>Identify toy blocks through computer vision</li>
@@ -98,8 +99,11 @@
 <br>
 <p>The simplifying design choices made here probably would not suffice in the real world. The decision to use AR Tags definitely constrains the realistic sizes of objects we can manipulate with. Moreover, using hand-mounted cameras, instead of head-mounted or externally mounted, cameras definitely limits the workspace and forces us to be tied to platforms, like Baxter, with hand-mounted cameras. Finally, not allowing Baxter to be cognizant of its environment means that environments would have to be highly controlled and largely static, characteristics that are too idealized compared to the real world.</p>
 
+
 <h3>
-<a id="challenge" class="anchor" href="#challenge" aria-hidden="true"><span class="octicon octicon-link"></span></a>Challenge</h1>
+<li><a id="challenge" class="anchor" href="#challenge" aria-hidden="true"><span class="octicon octicon-link"></span></a>Challenge</li></h3>
+</ol>
+
 
 <div align="center">
 <figure>
@@ -111,9 +115,12 @@
 <br>
 <p>In this project, the hardware limitation leads to three different challenges.
 <ul>
-  <li> <strong>Suction cup size larger than the block:</strong> When the object is smaller than the suction cup, the vacuum gripper will have the air leakage and fail to adhere the block. Since we cannot change the size of suction cup, the easiest solution is changing the size of the blocks.</li>
-  <li><strong>Head camera too far away from the table:</strong> The original plan is to use the head camera to search the blocks on the tables and the two arms to stack the blocks, which is similar to human's behavior. However, the view from the head camera is too far away from the table so that it could not see any AR Tags. Therefore, we change to use right hand camera to search the blocks on table. In this case, we can easily adjust the camera position to obtain a good AR Tag measurement.</li> 
-  <li><strong>Camera callibration:</strong>If it leaves too far from the center of the camera, the AR Tags will have an offset, which will send a wrong location for Baxter grasping the target. Because we could not callibrate the camera built in Baxter, we define a grasping region, where the offset in the region would be acceptable for the Baxter successfully grasp the blocks.  
+  <li> <strong>Suction cup size larger than the block:</strong> </li>
+    When the object is smaller than the suction cup, the vacuum gripper will have the air leakage and fail to adhere the block. Since we cannot change the size of suction cup, the easiest solution is changing the size of the blocks.
+  <li><strong>Head camera too far away from the table:</strong> </li> 
+    The original plan is to use the head camera to search the blocks on the tables and the two arms to stack the blocks, which is similar to human's behavior. However, the view from the head camera is too far away from the table so that it could not see any AR Tags. Therefore, we change to use right hand camera to search the blocks on table. In this case, we can easily adjust the camera position to obtain a good AR Tag measurement.
+  <li><strong>Camera callibration:</strong></li>
+    If it leaves too far from the center of the camera, the AR Tags will have an offset, which will send a wrong location for Baxter grasping the target. Because we could not callibrate the camera built in Baxter, we define a grasping region, where the offset in the region would be acceptable for the Baxter successfully grasp the blocks.  
 </ul>  
 
 
@@ -162,14 +169,15 @@
 <p>Baxter's path planning can be seperated into the following step: </p>
 
 <ol>
-<li>Go to the initial position: In order to avoid the tower collapse, we want Baxter leaves a safe distance from the tower so that its motion would not affect the balance of the tower. Therefore, Baxter goes to the initial position with slow velocity before grasping the new block. </li>
-<li>Approach to 10cm above the Target Block: The target pose is acquired from publishMarkerInfo. The desired path can be generated from MoveIt. To make Baxter's motion more efficient, we put some via points in the path to avoid the robot detouring. Also, we increase the robot speed in this segment, since we don't have to worry aobut any object hit by the robot. </li>
-<li>Approach to the Target Block: In order to carefully contact on the center of the target, the Baxter uses cautious motion to approach the block.  </li>
-<li>Turn on the Suction Actuator: Baxter turns on the vacuum gripper to adhere the block on its end effector.</li>
-<li>Move the Block to 10cm above the Destination: The destination is computed from the position of the last block has been placed. Similar to Step 2, we generate some via points and use fast motion to approach the destination. </li>
-<li>Approach to Destination: To eliminate the placement offeset and minimize the collapse risk, Baxter use very slow speed to approach the destination.</li>
-<li>Turn off the Suction Actuator: Baxter turns off the vacuum gripper to release the block on the desired placement.</li>
-<li>Lift 5cm above the Tower: Baxter leaves from the contact point on the tower, and waits for the next iteration.</li>
+<li><strong>Go to the initial position:</strong> In order to avoid the tower collapse, we want Baxter leaves a safe distance from the tower so that its motion would not affect the balance of the tower. Therefore, Baxter goes to the initial position with slow velocity before grasping the new block.</li>
+<li><strong>Approach to 10cm above the Target Block:</strong> The target pose is acquired from publishMarker-Info. The desired path can be generated from MoveIt. To make Baxter's motion more efficient, we put some via points in the path to avoid the robot detouring. Also, we increase the robot speed in this segment, since we don't have to worry aobut any object hit by the robot. </li>
+<li><strong>Approach to the Target Block:</strong> In order to carefully contact on the center of the target, the Baxter uses cautious motion to approach the block.</li>
+<li><strong>Turn on the Suction Actuator:</strong> Baxter turns on the vacuum gripper to adhere the block on its end effector.</li>
+<li><strong>Move the Block to 10cm above the Destination:</strong> The destination is computed from the position of the last block has been placed. Similar to Step 2, we generate some via points and use fast motion to approach the destination. </li>
+<li><strong>Approach to Destination:</strong> To eliminate the placement offeset and minimize the collapse risk, Baxter use very slow speed to approach the destination.</li>
+<li><strong>Turn off the Suction Actuator:</strong> Baxter turns off the vacuum gripper to release the block on the desired placement.</li>
+<li><strong>Lift 5cm above the Tower:</strong> Baxter leaves from the contact point on the tower, and waits for the next iteration.</li>
+</ol>
 </br>
 
 <h1>
@@ -184,10 +192,9 @@
 </ul>
 
 <iframe width="560" height="315" src="//www.youtube.com/embed/q37Nc350ZgY" frameborder="0" allowfullscreen></iframe>
-
 </br>
-<p> </p>
 
+<p> </p>
 <h1>
 <a id="conclusion" class="anchor" href="#conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h1>
 
